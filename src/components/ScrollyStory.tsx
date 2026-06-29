@@ -37,13 +37,13 @@ function StoryStep({ id, index, chapter, title, children, onActive }: StoryStepP
     >
       <div
         className={cn(
-          "story-step-inner w-full transition-[opacity,transform] duration-700 ease-out",
-          active ? "translate-y-0 opacity-100" : "translate-y-10 opacity-[0.18]"
+          "story-step-inner w-full transition-[opacity,transform] duration-300 ease-out",
+          active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-[0.25]"
         )}
       >
         <p
           className={cn(
-            "text-xs font-medium uppercase tracking-[0.28em] transition-colors duration-500",
+            "text-xs font-medium uppercase tracking-[0.28em] transition-colors duration-200",
             active ? "text-gold" : "text-ink-muted/50"
           )}
         >
@@ -51,7 +51,7 @@ function StoryStep({ id, index, chapter, title, children, onActive }: StoryStepP
         </p>
         <h2
           className={cn(
-            "mt-4 font-serif text-4xl leading-tight transition-all duration-700 sm:text-5xl",
+            "mt-4 font-serif text-4xl leading-tight transition-all duration-300 sm:text-5xl",
             active ? "text-ink" : "text-ink/40"
           )}
         >
@@ -59,8 +59,8 @@ function StoryStep({ id, index, chapter, title, children, onActive }: StoryStepP
         </h2>
         <div
           className={cn(
-            "mt-8 space-y-6 transition-all duration-700 delay-100",
-            active ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            "mt-8 space-y-6 transition-all duration-300",
+            active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
           )}
         >
           {children}
@@ -99,7 +99,7 @@ export function ScrollyStory({ activeStep, onStepChange }: ScrollyStoryProps) {
                     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
                   }}
                   className={cn(
-                    "rounded-full transition-all duration-500",
+                    "rounded-full transition-all duration-200",
                     activeStep === i
                       ? "h-8 w-2 bg-olive"
                       : "size-2 bg-ink/15 hover:bg-ink/30"
@@ -107,7 +107,7 @@ export function ScrollyStory({ activeStep, onStepChange }: ScrollyStoryProps) {
                 />
               ))}
             </div>
-            <p className="mt-8 max-w-[10rem] font-serif text-lg italic leading-snug text-ink-muted/70 transition-opacity duration-700">
+            <p className="mt-8 max-w-[10rem] font-serif text-lg italic leading-snug text-ink-muted/70 transition-opacity duration-300">
               {chapters[activeStep]?.caption}
             </p>
           </div>
@@ -132,7 +132,7 @@ export function ScrollyStory({ activeStep, onStepChange }: ScrollyStoryProps) {
                 <div
                   key={name}
                   className="story-card rounded-2xl border border-ink/8 bg-white/40 px-4 py-4 backdrop-blur-sm"
-                  style={{ transitionDelay: `${150 + i * 80}ms` }}
+                  style={{ transitionDelay: `${40 + i * 30}ms` }}
                 >
                   <p className="text-sm font-medium text-ink">{name}</p>
                   <p className="mt-1 text-xs leading-snug text-ink-muted">{level}</p>

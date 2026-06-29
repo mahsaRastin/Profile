@@ -12,14 +12,14 @@ export function useScrollyStep<T extends HTMLElement>() {
     const update = () => {
       const rect = el.getBoundingClientRect()
       const viewport = window.innerHeight
-      const center = viewport * 0.5
-      const stepCenter = rect.top + rect.height * 0.5
-      const distance = Math.abs(stepCenter - center)
-      const range = viewport * 0.55
+      const stepCenter = rect.top + rect.height * 0.4
+      const focusLine = viewport * 0.42
+      const distance = Math.abs(stepCenter - focusLine)
+      const range = viewport * 0.38
       const nextProgress = Math.max(0, 1 - distance / range)
 
       setProgress(nextProgress)
-      setActive(nextProgress > 0.45)
+      setActive(rect.top < viewport * 0.78 && rect.bottom > viewport * 0.22)
     }
 
     update()
