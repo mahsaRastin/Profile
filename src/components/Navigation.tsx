@@ -51,33 +51,33 @@ export function Navigation({ active, onNavigate }: NavigationProps) {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-8">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-[max(1rem,env(safe-area-inset-top))] sm:px-8">
       <nav
         className={cn(
-          "mx-auto flex max-w-5xl items-center justify-between",
-          "rounded-full border border-white/60 bg-white/40 px-4 py-2.5 shadow-sm backdrop-blur-xl sm:px-7 sm:py-3"
+          "mx-auto flex max-w-5xl min-w-0 items-center justify-between gap-3",
+          "rounded-full border border-white/60 bg-white/40 px-3 py-2 shadow-sm backdrop-blur-xl sm:px-7 sm:py-3"
         )}
         aria-label="Main navigation"
       >
         <button
           type="button"
           onClick={() => handleNavigate("about")}
-          className="group flex shrink-0 items-center gap-2.5 sm:gap-3"
+          className="group flex min-w-0 shrink-0 items-center gap-2 sm:gap-3"
         >
           <img
             src="/mahsa2.jpg"
             alt={profile.fullName}
-            className="size-9 rounded-full object-cover ring-2 ring-white/80 transition group-hover:ring-gold/60 sm:size-11"
+            className="size-9 shrink-0 rounded-full object-cover ring-2 ring-white/80 transition group-hover:ring-gold/60 sm:size-11"
           />
-          <span className="hidden text-sm font-medium tracking-wide text-ink sm:block">
+          <span className="hidden truncate text-sm font-medium tracking-wide text-ink sm:block">
             {profile.name}
           </span>
         </button>
 
-        {/* Desktop links */}
-        <ul className="hidden list-none items-center gap-1 md:flex lg:gap-2">
+        {/* Desktop links — only on large screens */}
+        <ul className="hidden min-w-0 list-none items-center gap-1 lg:flex lg:gap-2">
           {navItems.map(({ id, label }) => (
-            <li key={id}>
+            <li key={id} className="shrink-0">
               <button
                 type="button"
                 onClick={() => handleNavigate(id)}
@@ -94,10 +94,10 @@ export function Navigation({ active, onNavigate }: NavigationProps) {
           ))}
         </ul>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile / tablet menu toggle */}
         <button
           type="button"
-          className="flex size-10 items-center justify-center rounded-full text-ink transition hover:bg-white/50 md:hidden"
+          className="flex size-10 shrink-0 items-center justify-center rounded-full text-ink transition hover:bg-white/50 lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -107,22 +107,31 @@ export function Navigation({ active, onNavigate }: NavigationProps) {
         </button>
       </nav>
 
-      {/* Mobile menu panel */}
+      {/* Mobile full-screen menu */}
       <div
         id="mobile-nav"
         className={cn(
-          "mx-auto mt-2 max-w-5xl overflow-hidden transition-all duration-300 ease-out md:hidden",
-          open ? "max-h-80 opacity-100" : "pointer-events-none max-h-0 opacity-0"
+          "fixed inset-0 z-40 bg-ink/20 backdrop-blur-sm transition-opacity duration-300 lg:hidden",
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        )}
+        aria-hidden={!open}
+        onClick={() => setOpen(false)}
+      />
+
+      <div
+        className={cn(
+          "fixed inset-x-4 top-[calc(max(1rem,env(safe-area-inset-top))+4.5rem)] z-50 transition-all duration-300 ease-out lg:hidden",
+          open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
         )}
       >
-        <ul className="list-none rounded-3xl border border-white/60 bg-white/90 p-2 shadow-lg backdrop-blur-xl">
+        <ul className="mx-auto max-w-sm list-none rounded-3xl border border-white/60 bg-white/95 p-2 shadow-xl backdrop-blur-xl">
           {navItems.map(({ id, label }) => (
             <li key={id}>
               <button
                 type="button"
                 onClick={() => handleNavigate(id)}
                 className={cn(
-                  "flex w-full rounded-2xl px-4 py-3.5 text-left text-sm font-medium tracking-wide transition",
+                  "flex w-full rounded-2xl px-4 py-3.5 text-left text-base font-medium tracking-wide transition",
                   active === id
                     ? "bg-olive text-cream"
                     : "text-ink-muted hover:bg-cream/80 hover:text-ink"
