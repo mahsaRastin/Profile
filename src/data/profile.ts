@@ -7,7 +7,7 @@ export const profile = {
   location: "Tehran, Iran",
   email: "mahsarastin81@gmail.com",
   cvUrl: "/Mahsa-Rastegh-CV.pdf",
-  phones: ["+905314820862", "+989198874237"],
+  phones: ["+905314820862", "+909198874237"],
   university: "Yeditepe University",
   degree: "Software Development",
   year: "3rd year · since 2023",
