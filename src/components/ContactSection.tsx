@@ -5,10 +5,11 @@ import { cn } from "@/lib/utils"
 function formatPhone(phone: string) {
   if (phone.startsWith("+90")) {
     const digits = phone.slice(3)
-    if (digits.startsWith("919")) {
-      return `+90 ${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`
-    }
     return `+90 ${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6, 8)} ${digits.slice(8)}`
+  }
+  if (phone.startsWith("+98")) {
+    const digits = phone.slice(3)
+    return `+98 ${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`
   }
   return phone
 }
